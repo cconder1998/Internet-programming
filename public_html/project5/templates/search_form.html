@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Shopping Cart - myMovies</title>
+		<link rel='stylesheet' type='text/css' href='../css/site.css' />
+		<script src='./script.js'></script>
+	</head>
+	<body>
+		<p>Welcome, <?php echo $_SESSION['display_name'] ?> (<a href='#' onclick='return confirmLogout();'>logout</a>)</p>
+		<h2>myMovies Xpress!</h2>		
+		<p>Search for something!</p>
+		<form action='./search.php' method='post'>
+			<label>Keyword to Search: <input type='text' id='keyword' name='keyword' required></label><br /><br />
+			<button onclick='window.location.replace("./index.php");'>Cancel</button>&nbsp;&nbsp;
+			<input type='reset' value='Clear'>&nbsp;&nbsp;<input type='submit' value='Search'>
+		</form>
+	</body>
+</html>

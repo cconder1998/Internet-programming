@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Movie Search</title>
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<p>Welcome, <?=$_SESSION["displayName"]?> (<a onclick="confirmLogout()" href="javascript:void(0);">logout</a>)</p>
+		<h2>my Movies Xpress!</h2>
+		<p><?=count($array)?> Movies Found</p>
+		<?php
+			if (count($array) > 0) {
+				echo "<table>
+					<tr>
+						<th>Poster</th>
+						<th>Title (Year)</th>
+						<th>Add</th>
+					</tr>";
+			}
+			for($i = 0; $i < count($array); $i++) {	
+				echo '<tr>
+					<td><img src=' .$array[$i][Poster].' height="100"></td>
+					<td><a href="https://www.imdb.com/title/'.$array[$i][imdbID].'" target="_blank">'.$array[$i][Title].' ('.$array[$i][Year].')</a></td>
+					<td><a onclick="addMovie('."'".$array[$i][imdbID]."'".')" href="#">+</a></td>
+				</tr>';
+			}
+
+		?>
+		<input type="button" value="Cancel" onclick="location.href = './index.php'">
+	</body>
+</html>

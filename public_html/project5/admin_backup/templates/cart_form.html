@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Shopping Cart</title>
+		<script src="script.js"></script>
+	</head>
+	<body>
+		<p>Welcome, <?=$_SESSION["displayName"]?> (<a onclick="confirmLogout()" href="javascript:void(0);">logout</a>)</p>
+		<h2>my Movies Xpress!</h2>
+		<p><?=count($films)?> Movies in Your Shopping Cart</p>
+		<p style="color:red;"><?php if (count($films)==0) { echo "Add Some Movies to Your Cart!"; } ?></p>
+		<?php if (count($films) > 0) { 
+				echo "<table>
+					<tr>
+						<th>Poster</th>
+						<th>Title (Year)</th>
+						<th>Remove</th>
+					</tr>";
+				for($i = 0; $i < count($films); $i++) {	
+					$id = explode("\n", $films[$i]);
+					$movie = file_get_contents('http://www.omdbapi.com/?apikey=1d10174d&i='.$id[0].'&type=movie&r=json');
+					$array = json_decode($movie, true);
+					echo '<tr>
+						<td><img src=' .$array[Poster].' height="100"></td>
+						<td><a href="https://www.imdb.com/title/'.$id[0].'" target="_blank">'.$array[Title].' ('.$array[Year].')</a></td>
+						<td><a onclick="confirmRemove('."'".$array[Title]."'".','."'".$id[0]."'".')" href="#">X</a></td>
+					</tr>';
+				}
+				echo '</table>';
+			}
+		?>
+		
+		<button onclick="location.href = './search.php'">Add Movie</button>
+		<button onclick="confirmCheckout()">Checkout</button>
+	</body>
+</html>
